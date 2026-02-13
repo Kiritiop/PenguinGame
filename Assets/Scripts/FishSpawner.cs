@@ -19,6 +19,14 @@ public class FishSpawner : MonoBehaviour
         float randomY = Random.Range(minY, maxY);
 
         Vector3 spawnPos = new Vector3(spawnX, randomY, 0);
-        Instantiate(fishPrefabs[index], spawnPos, Quaternion.identity);
+
+        // Check if space is free
+        float checkRadius = 0.8f;
+        Collider2D hit = Physics2D.OverlapCircle(spawnPos, checkRadius);
+
+        if (hit == null)
+        {
+            Instantiate(fishPrefabs[index], spawnPos, Quaternion.identity);
+        }
     }
 }

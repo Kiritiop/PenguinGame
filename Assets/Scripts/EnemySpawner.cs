@@ -19,6 +19,14 @@ public class EnemySpawner : MonoBehaviour
         float randomY = Random.Range(minY, maxY);
 
         Vector3 spawnPos = new Vector3(spawnX, randomY, 0);
-        Instantiate(enemyPrefabs[index], spawnPos, Quaternion.identity);
+
+        float checkRadius = 0.8f;
+        Collider2D hit = Physics2D.OverlapCircle(spawnPos, checkRadius);
+
+        if (hit == null)
+        {
+            Instantiate(enemyPrefabs[index], spawnPos, Quaternion.identity);
+        }
     }
+
 }
