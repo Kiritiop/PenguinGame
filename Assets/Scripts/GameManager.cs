@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
     public GameObject gameOverPanel;
+    public GameObject PauseMenu;
+
+
+    public static bool IsPaused = false;
 
     private int score = 0;
     private bool isGameOver = false;
@@ -58,5 +62,37 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (IsPaused)
+            {
+                GameResume();
+            }
+
+            else
+            {
+                GamePause();
+            }
+            
+        }
+    }
+
+    public void GamePause()
+    {
+        PauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        IsPaused = true;
+
+    }
+
+    public void GameResume()
+    {
+        PauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        IsPaused = false;
+
     }
 }
