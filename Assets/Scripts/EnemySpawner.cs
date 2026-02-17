@@ -8,8 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public float minSpawnRate = 0.7f;
     public float spawnAcceleration = 0.03f;
 
-    public float minY = -4f;
-    public float maxY = 4f;
+    public Transform sandLevel;   // NEW
     public float spawnX = 10f;
 
     private float timer;
@@ -24,7 +23,10 @@ public class EnemySpawner : MonoBehaviour
     {
         if (GameManager.Instance == null) return;
 
-        currentSpawnRate = Mathf.Max(minSpawnRate, startSpawnRate - (Time.timeSinceLevelLoad * spawnAcceleration));
+        currentSpawnRate = Mathf.Max(
+            minSpawnRate,
+            startSpawnRate - (Time.timeSinceLevelLoad * spawnAcceleration)
+        );
 
         timer += Time.deltaTime;
 
@@ -38,9 +40,9 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         int index = Random.Range(0, enemyPrefabs.Length);
-        float randomY = Random.Range(minY, maxY);
 
-        Vector3 spawnPos = new Vector3(spawnX, randomY, 0);
+        float sandY = sandLevel.position.y; // Always spawn on sand
+        Vector3 spawnPos = new Vector3(spawnX, sandY, 0);
 
         Instantiate(enemyPrefabs[index], spawnPos, Quaternion.identity);
     }

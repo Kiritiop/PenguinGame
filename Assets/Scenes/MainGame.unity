@@ -1858,6 +1858,7 @@ GameObject:
   - component: {fileID: 1572285048}
   - component: {fileID: 1572285047}
   - component: {fileID: 1572285046}
+  - component: {fileID: 1572285049}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1879,7 +1880,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   enemyPrefabs:
   - {fileID: 4240106778077723218, guid: bd29ce0dd56e540bab80642034da3e9a, type: 3}
-  spawnRate: 3
+  startSpawnRate: 3
+  minSpawnRate: 0.7
+  spawnAcceleration: 0.02
   minY: -4
   maxY: 4
   spawnX: 10
@@ -1897,7 +1900,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishSpawner
   fishPrefabs:
   - {fileID: 3176256677585871092, guid: 46cdf078182814bc2b819857f1675b02, type: 3}
-  spawnRate: 2
+  startSpawnRate: 2
+  minSpawnRate: 0.5
+  spawnAcceleration: 0.02
   minY: -4
   maxY: 4
   spawnX: 10
@@ -1916,6 +1921,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1572285049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572285045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624fe84f49e4b4d67aadbf482b1e5bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SandSpawner
+  sandPrefab: {fileID: 7661450858882186764, guid: 1e9ceca4ee1744d71b42e813b44b344b, type: 3}
+  initialTiles: 5
+  tileWidth: 20
 --- !u!1 &1627228440
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,7 +2032,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2023,7 +2043,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1627228444
 SpriteRenderer:
   serializedVersion: 2
@@ -2092,7 +2112,7 @@ Transform:
   m_GameObject: {fileID: 1627228440}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 0, z: 0}
+  m_LocalPosition: {x: -7, y: -2.5, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2472,6 +2492,63 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &6654090237835326412
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6310381180064705746, guid: 1e9ceca4ee1744d71b42e813b44b344b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310381180064705746, guid: 1e9ceca4ee1744d71b42e813b44b344b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310381180064705746, guid: 1e9ceca4ee1744d71b42e813b44b344b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310381180064705746, guid: 1e9ceca4ee1744d71b42e813b44b344b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310381180064705746, guid: 1e9ceca4ee1744d71b42e813b44b344b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310381180064705746, guid: 1e9ceca4ee1744d71b42e813b44b344b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310381180064705746, guid: 1e9ceca4ee1744d71b42e813b44b344b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310381180064705746, guid: 1e9ceca4ee1744d71b42e813b44b344b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310381180064705746, guid: 1e9ceca4ee1744d71b42e813b44b344b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310381180064705746, guid: 1e9ceca4ee1744d71b42e813b44b344b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661450858882186764, guid: 1e9ceca4ee1744d71b42e813b44b344b, type: 3}
+      propertyPath: m_Name
+      value: Sand
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e9ceca4ee1744d71b42e813b44b344b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2483,3 +2560,4 @@ SceneRoots:
   - {fileID: 316894101}
   - {fileID: 2145852338}
   - {fileID: 1054095208}
+  - {fileID: 6654090237835326412}

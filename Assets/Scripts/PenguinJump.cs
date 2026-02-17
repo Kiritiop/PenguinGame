@@ -1,10 +1,8 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PenguinJump : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float jumpForce = 12f;
-
+    public float jumpForce = 8f;
     private Rigidbody2D rb;
     private bool isGrounded;
 
@@ -15,11 +13,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Horizontal movement only
-        float moveX = Input.GetAxisRaw("Horizontal");
-        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
-
-        // Jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -29,12 +22,16 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
+        {
             isGrounded = true;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
+        {
             isGrounded = false;
+        }
     }
 }

@@ -4,13 +4,17 @@ public class FishSpawner : MonoBehaviour
 {
     public GameObject[] fishPrefabs;
 
-    public float startSpawnRate = 2f;        // seconds between spawns at start
-    public float minSpawnRate = 0.5f;        // fastest allowed spawn rate
-    public float spawnAcceleration = 0.05f;  // how fast spawn rate decreases
+    public float startSpawnRate = 2f;
+    public float minSpawnRate = 0.5f;
+    public float spawnAcceleration = 0.05f;
 
-    public float minY = -4f;
-    public float maxY = 4f;
+    public Transform sandLevel;     // NEW
+    public float minHeightAboveSand = 0f;
+    public float maxHeightAboveSand = 4f;
+
     public float spawnX = 10f;
+
+    public LayerMask enemyLayer;    // NEW (to prevent overlap)
 
     private float timer;
     private float currentSpawnRate;
@@ -24,7 +28,6 @@ public class FishSpawner : MonoBehaviour
     {
         if (GameManager.Instance == null) return;
 
-        // Difficulty scaling
         currentSpawnRate = Mathf.Max(
             minSpawnRate,
             startSpawnRate - (Time.timeSinceLevelLoad * spawnAcceleration)
@@ -42,10 +45,18 @@ public class FishSpawner : MonoBehaviour
     void SpawnFish()
     {
         int index = Random.Range(0, fishPrefabs.Length);
-        float randomY = Random.Range(minY, maxY);
 
-        Vector3 spawnPos = new Vector3(spawnX, randomY, 0);
+        float randomHeight = Random.Range(minHeightAboveSand, maxHeightAboveSand);
+        float spawnY = sandLevel.position.y + randomHeight;
 
-        Instantiate(fishPrefabs[index], spawnPos, Quaternion.identity);
+        Vector3 spawnPos = new Vector3(spawnX, spawnY, 0);
+
+        // Check for enemy overlap
+        Collider2D hit = Physics2D.OverlapCircle(spawnPos, 0.7f, enemyLayer);
+
+        if (hit == null)
+        {
+            Instantiate(fishPrefabs[index], spawnPos, Quaternion.identity);
+        }
     }
 }
