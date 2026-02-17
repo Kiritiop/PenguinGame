@@ -3,14 +3,40 @@ using UnityEngine;
 public class FishSpawner : MonoBehaviour
 {
     public GameObject[] fishPrefabs;
-    public float spawnRate = 2f;
+
+    public float startSpawnRate = 2f;        // seconds between spawns at start
+    public float minSpawnRate = 0.5f;        // fastest allowed spawn rate
+    public float spawnAcceleration = 0.05f;  // how fast spawn rate decreases
+
     public float minY = -4f;
     public float maxY = 4f;
     public float spawnX = 10f;
 
+    private float timer;
+    private float currentSpawnRate;
+
     void Start()
     {
-        InvokeRepeating(nameof(SpawnFish), 1f, spawnRate);
+        currentSpawnRate = startSpawnRate;
+    }
+
+    void Update()
+    {
+        if (GameManager.Instance == null) return;
+
+        // Difficulty scaling
+        currentSpawnRate = Mathf.Max(
+            minSpawnRate,
+            startSpawnRate - (Time.timeSinceLevelLoad * spawnAcceleration)
+        );
+
+        timer += Time.deltaTime;
+
+        if (timer >= currentSpawnRate)
+        {
+            SpawnFish();
+            timer = 0f;
+        }
     }
 
     void SpawnFish()
@@ -20,13 +46,6 @@ public class FishSpawner : MonoBehaviour
 
         Vector3 spawnPos = new Vector3(spawnX, randomY, 0);
 
-        // Check if space is free
-        float checkRadius = 0.8f;
-        Collider2D hit = Physics2D.OverlapCircle(spawnPos, checkRadius);
-
-        if (hit == null)
-        {
-            Instantiate(fishPrefabs[index], spawnPos, Quaternion.identity);
-        }
+        Instantiate(fishPrefabs[index], spawnPos, Quaternion.identity);
     }
 }

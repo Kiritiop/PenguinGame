@@ -558,6 +558,8 @@ MonoBehaviour:
   scoreText: {fileID: 1396837685}
   gameOverPanel: {fileID: 394353799}
   PauseMenu: {fileID: 1001978213}
+  baseSpeed: 5
+  speedIncreaseRate: 0.2
 --- !u!4 &316894101
 Transform:
   m_ObjectHideFlags: 0

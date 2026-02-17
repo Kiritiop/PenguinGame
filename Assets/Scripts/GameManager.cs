@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     private int score = 0;
     private bool isGameOver = false;
+    public float baseSpeed = 5f;
+    public float speedIncreaseRate = 0.15f; 
 
     void Awake()
     {
@@ -94,5 +96,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         IsPaused = false;
 
+    }
+    public float GetCurrentSpeed()
+    {
+        return baseSpeed + (Time.timeSinceLevelLoad * speedIncreaseRate);
     }
 }

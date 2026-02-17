@@ -3,14 +3,36 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;
-    public float spawnRate = 3f;
+
+    public float startSpawnRate = 3f;
+    public float minSpawnRate = 0.7f;
+    public float spawnAcceleration = 0.03f;
+
     public float minY = -4f;
     public float maxY = 4f;
     public float spawnX = 10f;
 
+    private float timer;
+    private float currentSpawnRate;
+
     void Start()
     {
-        InvokeRepeating(nameof(SpawnEnemy), 2f, spawnRate);
+        currentSpawnRate = startSpawnRate;
+    }
+
+    void Update()
+    {
+        if (GameManager.Instance == null) return;
+
+        currentSpawnRate = Mathf.Max(minSpawnRate, startSpawnRate - (Time.timeSinceLevelLoad * spawnAcceleration));
+
+        timer += Time.deltaTime;
+
+        if (timer >= currentSpawnRate)
+        {
+            SpawnEnemy();
+            timer = 0f;
+        }
     }
 
     void SpawnEnemy()
@@ -20,13 +42,6 @@ public class EnemySpawner : MonoBehaviour
 
         Vector3 spawnPos = new Vector3(spawnX, randomY, 0);
 
-        float checkRadius = 0.8f;
-        Collider2D hit = Physics2D.OverlapCircle(spawnPos, checkRadius);
-
-        if (hit == null)
-        {
-            Instantiate(enemyPrefabs[index], spawnPos, Quaternion.identity);
-        }
+        Instantiate(enemyPrefabs[index], spawnPos, Quaternion.identity);
     }
-
 }
