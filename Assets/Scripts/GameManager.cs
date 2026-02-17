@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public GameObject gameOverPanel;
     public GameObject PauseMenu;
+    public TextMeshProUGUI gameOverScoreText; 
 
 
     public static bool IsPaused = false;
@@ -58,6 +59,12 @@ public class GameManager : MonoBehaviour
         IsPaused = false;
 
         gameOverPanel.SetActive(true);
+
+        if (gameOverScoreText != null)
+        {
+            gameOverScoreText.text = "Final Score: " + score;
+        }
+
         Time.timeScale = 0f;
     }
 
