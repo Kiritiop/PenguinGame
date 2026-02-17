@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     {
         UpdateScoreUI();
         gameOverPanel.SetActive(false);
+        PauseMenu.SetActive(false);
+        IsPaused = false;
         Time.timeScale = 1f;
     }
 
@@ -51,6 +53,10 @@ public class GameManager : MonoBehaviour
         if (isGameOver) return;
 
         isGameOver = true;
+
+        PauseMenu.SetActive(false);
+        IsPaused = false;
+
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
     }
@@ -67,6 +73,8 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        if (isGameOver) return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (IsPaused)
