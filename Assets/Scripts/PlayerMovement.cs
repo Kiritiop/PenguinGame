@@ -16,8 +16,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // Horizontal movement only
-        float moveX = Input.GetAxisRaw("Horizontal");
-        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)

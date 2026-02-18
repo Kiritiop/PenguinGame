@@ -10,8 +10,7 @@ public class FishSpawner : MonoBehaviour
 
     public Transform sandLevel;     // NEW
     public float minHeightAboveSand = 0f;
-    public float maxHeightAboveSand = 4f;
-
+    public float maxHeightAboveSand = 3f;
     public float spawnX = 10f;
 
     public LayerMask enemyLayer;    // NEW (to prevent overlap)
