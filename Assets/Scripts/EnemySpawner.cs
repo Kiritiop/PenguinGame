@@ -7,7 +7,6 @@ public class EnemySpawner : MonoBehaviour
     public float startSpawnRate = 3f;
     public float minSpawnRate = 0.7f;
     public float spawnAcceleration = 0.03f;
-
     public Transform sandLevel;   // NEW
     public float spawnX = 10f;
 

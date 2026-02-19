@@ -292,8 +292,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< Updated upstream
   m_AnchoredPosition: {x: 0, y: 3}
   m_SizeDelta: {x: 384.3838, y: 75.8652}
+=======
+  m_AnchoredPosition: {x: -10, y: 107}
+  m_SizeDelta: {x: 380, y: 75}
+>>>>>>> Stashed changes
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &149159335
 MonoBehaviour:
@@ -1181,8 +1186,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< Updated upstream
   m_AnchoredPosition: {x: 0, y: 164}
   m_SizeDelta: {x: 370.2262, y: 75.8652}
+=======
+  m_AnchoredPosition: {x: 10, y: 219}
+  m_SizeDelta: {x: 380, y: 75}
+>>>>>>> Stashed changes
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &923138036
 MonoBehaviour:
@@ -1238,7 +1248,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2045,6 +2055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   enemyPrefabs:
   - {fileID: 4240106778077723218, guid: bd29ce0dd56e540bab80642034da3e9a, type: 3}
+  - {fileID: 2020640700168810975, guid: 4f44e0f6f0948984c99fde5615efce32, type: 3}
   startSpawnRate: 3
   minSpawnRate: 0.7
   spawnAcceleration: 0.02
@@ -2064,6 +2075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishSpawner
   fishPrefabs:
   - {fileID: 3176256677585871092, guid: 46cdf078182814bc2b819857f1675b02, type: 3}
+  - {fileID: 3558017159087813328, guid: 58f5338ce872a3d40b241a499fd36040, type: 3}
   startSpawnRate: 2
   minSpawnRate: 0.5
   spawnAcceleration: 0.02
@@ -2458,7 +2470,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< Updated upstream
   m_AnchoredPosition: {x: 0, y: -98}
+=======
+  m_AnchoredPosition: {x: -10, y: 13.5}
+>>>>>>> Stashed changes
   m_SizeDelta: {x: 380, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1917747901
