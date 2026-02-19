@@ -8,12 +8,12 @@ public class FishSpawner : MonoBehaviour
     public float minSpawnRate = 0.5f;
     public float spawnAcceleration = 0.05f;
 
-    public Transform sandLevel;     // NEW
+    public Transform sandLevel;
     public float minHeightAboveSand = 0f;
-    public float maxHeightAboveSand = 3f;
+    public float maxHeightAboveSand = 2f;
     public float spawnX = 10f;
 
-    public LayerMask enemyLayer;    // NEW (to prevent overlap)
+    public LayerMask enemyLayer;
 
     private float timer;
     private float currentSpawnRate;
@@ -27,10 +27,7 @@ public class FishSpawner : MonoBehaviour
     {
         if (GameManager.Instance == null) return;
 
-        currentSpawnRate = Mathf.Max(
-            minSpawnRate,
-            startSpawnRate - (Time.timeSinceLevelLoad * spawnAcceleration)
-        );
+        currentSpawnRate = Mathf.Max(minSpawnRate, startSpawnRate - (Time.timeSinceLevelLoad * spawnAcceleration));
 
         timer += Time.deltaTime;
 
@@ -49,8 +46,6 @@ public class FishSpawner : MonoBehaviour
         float spawnY = sandLevel.position.y + randomHeight;
 
         Vector3 spawnPos = new Vector3(spawnX, spawnY, 0);
-
-        // Check for enemy overlap
         Collider2D hit = Physics2D.OverlapCircle(spawnPos, 0.7f, enemyLayer);
 
         if (hit == null)
