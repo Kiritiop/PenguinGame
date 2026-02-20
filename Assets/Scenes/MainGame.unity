@@ -2045,6 +2045,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   enemyPrefabs:
   - {fileID: 4240106778077723218, guid: bd29ce0dd56e540bab80642034da3e9a, type: 3}
+  - {fileID: 659940033389574296, guid: 062b7339031be40e1a26bc7db7e70f9f, type: 3}
+  - {fileID: 4240106778077723218, guid: bd29ce0dd56e540bab80642034da3e9a, type: 3}
   startSpawnRate: 3
   minSpawnRate: 0.7
   spawnAcceleration: 0.02
