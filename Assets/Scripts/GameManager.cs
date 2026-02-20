@@ -1,11 +1,13 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
+    private string savePath;
+    private int highScore = 0;
     public TextMeshProUGUI scoreText;
     public GameObject gameOverPanel;
     public GameObject PauseMenu;
@@ -34,6 +36,15 @@ public class GameManager : MonoBehaviour
         PauseMenu.SetActive(false);
         IsPaused = false;
         Time.timeScale = 1f;
+        savePath = Application.persistentDataPath + "/highscore.json";
+
+        LoadHighScore();
+
+        UpdateScoreUI();
+        gameOverPanel.SetActive(false);
+        PauseMenu.SetActive(false);
+        IsPaused = false;
+        Time.timeScale = 1f;
     }
 
     public void AddScore(int amount)
@@ -57,12 +68,17 @@ public class GameManager : MonoBehaviour
 
         PauseMenu.SetActive(false);
         IsPaused = false;
+        if (score > highScore)
+        {
+            highScore = score;
+            SaveHighScore();
+        }
 
         gameOverPanel.SetActive(true);
 
         if (gameOverScoreText != null)
         {
-            gameOverScoreText.text = "Final Score: " + score;
+            gameOverScoreText.text = "Final Score: " + score + "\nHigh Score: " + highScore;
         }
 
         Time.timeScale = 0f;
@@ -115,5 +131,27 @@ public class GameManager : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return baseSpeed + (Time.timeSinceLevelLoad * speedIncreaseRate);
+    }
+    void LoadHighScore()
+    {
+        if (File.Exists(savePath))
+        {
+            string json = File.ReadAllText(savePath);
+            HighScoreData data = JsonUtility.FromJson<HighScoreData>(json);
+            highScore = data.highScore;
+        }
+        else
+        {
+            highScore = 0;
+        }
+    }
+
+    void SaveHighScore()
+    {
+        HighScoreData data = new HighScoreData();
+        data.highScore = highScore;
+
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(savePath, json);
     }
 }
